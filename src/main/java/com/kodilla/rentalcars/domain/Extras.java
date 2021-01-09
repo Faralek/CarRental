@@ -39,8 +39,16 @@ public class Extras {
         return price;
     }
 
-    @ManyToMany(mappedBy = "extras")
+    @ManyToMany(mappedBy = "extrasList")
     public List<Car> getCars() {
         return cars;
+    }
+
+    @Override
+    public String toString() {
+        return "Extras{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                '}';
     }
 }

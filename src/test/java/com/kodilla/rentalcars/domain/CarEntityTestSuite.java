@@ -15,7 +15,7 @@ public class CarEntityTestSuite {
     @Autowired
     CarRepository carRepository;
     @Test
-    public void createUserTestSuite(){
+    public void createCarTestSuite(){
         Car car = new Car();
         Car car1 = new Car();
 

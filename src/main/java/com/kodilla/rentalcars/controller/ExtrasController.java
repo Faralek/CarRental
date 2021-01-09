@@ -25,6 +25,11 @@ public class ExtrasController {
         extrasDbService.saveExtras(extrasMapper.mapToExtras(extrasDto));
     }
 
+    @RequestMapping(method = RequestMethod.PUT, value = "updateExtras")
+    public ExtrasDto updateCar(@RequestBody ExtrasDto extrasDto) {
+        return extrasMapper.mapToExtrasDto(extrasDbService.saveExtras(extrasMapper.mapToExtras(extrasDto)));
+    }
+
     @RequestMapping(method = RequestMethod.GET, value = "getExtrasList")
     public List<ExtrasDto> getExtrasList() {
         return extrasMapper.mapToExtrasDtoList(extrasDbService.getAllExtras());

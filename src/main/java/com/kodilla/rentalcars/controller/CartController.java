@@ -1,7 +1,10 @@
 package com.kodilla.rentalcars.controller;
 
+import com.kodilla.rentalcars.domain.Cart;
+import com.kodilla.rentalcars.dto.CarDto;
 import com.kodilla.rentalcars.dto.CartDto;
 import com.kodilla.rentalcars.exception.CartNotFoundException;
+import com.kodilla.rentalcars.mapper.CarMapper;
 import com.kodilla.rentalcars.mapper.CartMapper;
 import com.kodilla.rentalcars.service.CartDbService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +23,31 @@ public class CartController {
     private CartDbService cartDbService;
     @Autowired
     private CartMapper cartMapper;
+    @Autowired
+    private CarMapper carMapper;
 
     @RequestMapping(method = RequestMethod.POST, value = "createCart", consumes = APPLICATION_JSON_VALUE)
     public void createCart(@RequestBody CartDto cartDto) {
         cartDbService.saveCart(cartMapper.mapToCart(cartDto));
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "updateCart")
+    public CartDto updateCart(@RequestBody CartDto cartDto) {
+        return cartMapper.mapToCartDto(cartDbService.saveCart(cartMapper.mapToCart(cartDto)));
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "addCar")
+    public void addCar(@RequestParam int duration, @RequestBody CarDto carDto, @RequestParam Long id) {
+        Cart cart = cartDbService.getCartById(id).get();
+        cartDbService.getCartById(id).get().addCar(carMapper.mapToCar(carDto), duration);
+        cartDbService.saveCart(cart);
+    }
+
+    @RequestMapping(method = RequestMethod.DELETE, value = "removeCar")
+    public void removeCar(@RequestParam int duration, @RequestBody CarDto carDto, @RequestParam Long id) {
+        Cart cart = cartDbService.getCartById(id).get();
+        cartDbService.getCartById(id).get().removeCar(carMapper.mapToCar(carDto), duration);
+        cartDbService.saveCart(cart);
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getCarts")

@@ -1,5 +1,6 @@
 package com.kodilla.rentalcars.domain;
 
+import com.kodilla.rentalcars.exception.ExtrasNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,7 +22,7 @@ public class Car {
     private String description;
     private String name;
     private BigDecimal dailyPrice;
-    private List<Extras> extras = new ArrayList<>();
+    private List<Extras> extrasList = new ArrayList<>();
     private Cart cart;
     private Order order;
 
@@ -54,8 +55,8 @@ public class Car {
             joinColumns = {@JoinColumn(name = "CAR_ID", referencedColumnName = "ID")},
             inverseJoinColumns = {@JoinColumn(name = "EXTRAS_ID", referencedColumnName = "ID")}
     )
-    public List<Extras> getExtras() {
-        return extras;
+    public List<Extras> getExtrasList() {
+        return extrasList;
     }
 
     @ManyToOne
@@ -68,5 +69,19 @@ public class Car {
     @JoinColumn(name = "ORDER")
     public Order getOrder() {
         return order;
+    }
+
+    public void addExtras(Extras extras) {
+        extrasList.add(extras);
+        dailyPrice = dailyPrice.add(extras.getPrice());
+    }
+
+    public void deleteExtras(Extras extras) throws ExtrasNotFoundException {
+        if (extrasList.contains(extras)){
+            extrasList.remove(extras);
+            dailyPrice = dailyPrice.subtract(extras.getPrice());
+        }else{
+           throw new ExtrasNotFoundException("Extra option not found" + extras);
+        }
     }
 }

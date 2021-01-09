@@ -22,7 +22,7 @@ public class CarMapper {
                 car.getDescription(),
                 car.getName(),
                 car.getDailyPrice(),
-                extrasMapper.mapToExtrasDtoList(car.getExtras()),
+                extrasMapper.mapToExtrasDtoList(car.getExtrasList()),
                 cartMapper.mapToCartDto(car.getCart()),
                 orderMapper.mapToOrderDto(car.getOrder()));
     }
@@ -57,7 +57,7 @@ public class CarMapper {
                         c.getDescription(),
                         c.getName(),
                         c.getDailyPrice(),
-                        extrasMapper.mapToExtrasDtoList(c.getExtras()),
+                        extrasMapper.mapToExtrasDtoList(c.getExtrasList()),
                         cartMapper.mapToCartDto(c.getCart()),
                         orderMapper.mapToOrderDto(c.getOrder())))
                 .collect(Collectors.toList());

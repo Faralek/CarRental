@@ -1,5 +1,6 @@
 package com.kodilla.rentalcars.controller;
 
+import com.kodilla.rentalcars.dto.CarDto;
 import com.kodilla.rentalcars.dto.UserDto;
 import com.kodilla.rentalcars.exception.UserNotFoundException;
 import com.kodilla.rentalcars.mapper.UserMapper;
@@ -23,6 +24,11 @@ public class UserController {
     @RequestMapping(method = RequestMethod.POST, value = "createUser", consumes = APPLICATION_JSON_VALUE)
     public void createUser(@RequestBody UserDto userDto) {
         userDbService.saveUser(userMapper.mapToUser(userDto));
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "updateUser")
+    public UserDto updateUser(@RequestBody UserDto userDto) {
+        return userMapper.mapToUserDto(userDbService.saveUser(userMapper.mapToUser(userDto)));
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getUserList")

@@ -1,5 +1,6 @@
 package com.kodilla.rentalcars.controller;
 
+import com.kodilla.rentalcars.dto.CarDto;
 import com.kodilla.rentalcars.dto.OrderDto;
 import com.kodilla.rentalcars.exception.OrderNotFoundException;
 import com.kodilla.rentalcars.mapper.OrderMapper;
@@ -23,6 +24,11 @@ public class OrderController {
     @RequestMapping(method = RequestMethod.POST, value = "createOrder", consumes = APPLICATION_JSON_VALUE)
     public void createOrder(@RequestBody OrderDto orderDto) {
         orderDbService.saveOrder(orderMapper.mapToOrder(orderDto));
+    }
+
+    @RequestMapping(method = RequestMethod.PUT, value = "updateOrder")
+    public OrderDto updateCar(@RequestBody OrderDto orderDto) {
+        return orderMapper.mapToOrderDto(orderDbService.saveOrder(orderMapper.mapToOrder(orderDto)));
     }
 
     @RequestMapping(method = RequestMethod.GET, value = "getOrderList")

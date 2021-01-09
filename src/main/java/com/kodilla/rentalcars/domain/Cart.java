@@ -1,5 +1,6 @@
 package com.kodilla.rentalcars.domain;
 
+
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -56,4 +57,17 @@ public class Cart {
         return user;
     }
 
+    public void addCar(Car car, int duration) {
+        BigDecimal carPrice = car.getDailyPrice().multiply(BigDecimal.valueOf(duration));
+        sum = sum.add(carPrice);
+        cars.add(car);
+    }
+
+    public void removeCar(Car car, int duration) {
+        if (duration > 0) {
+            BigDecimal carPrice = car.getDailyPrice().multiply(BigDecimal.valueOf(duration));
+            sum = sum.subtract(carPrice);
+            cars.remove(car);
+        }
+    }
 }
