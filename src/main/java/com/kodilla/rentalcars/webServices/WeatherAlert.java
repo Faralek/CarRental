@@ -2,12 +2,13 @@ package com.kodilla.rentalcars.webServices;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.Objects;
 
+@Service
 public class WeatherAlert {
-
     public String getWeatherAlert() throws IOException {
         OkHttpClient client = new OkHttpClient();
 

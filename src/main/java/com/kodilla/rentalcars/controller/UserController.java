@@ -1,6 +1,5 @@
 package com.kodilla.rentalcars.controller;
 
-import com.kodilla.rentalcars.dto.CarDto;
 import com.kodilla.rentalcars.dto.UserDto;
 import com.kodilla.rentalcars.exception.UserNotFoundException;
 import com.kodilla.rentalcars.mapper.UserMapper;

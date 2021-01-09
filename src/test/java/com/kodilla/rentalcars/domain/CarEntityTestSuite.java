@@ -1,7 +1,6 @@
 package com.kodilla.rentalcars.domain;
 
 import com.kodilla.rentalcars.repository.CarRepository;
-import com.kodilla.rentalcars.repository.CartRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,7 +1,6 @@
 package com.kodilla.rentalcars.controller;
 
 import com.kodilla.rentalcars.domain.Car;
-import com.kodilla.rentalcars.domain.Cart;
 import com.kodilla.rentalcars.dto.CarDto;
 import com.kodilla.rentalcars.dto.ExtrasDto;
 import com.kodilla.rentalcars.exception.CarNotFoundException;
