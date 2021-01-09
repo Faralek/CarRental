@@ -3,22 +3,24 @@ package com.kodilla.rentalcars.mapper;
 import com.kodilla.rentalcars.domain.Extras;
 import com.kodilla.rentalcars.dto.ExtrasDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class ExtrasMapper {
     @Autowired
     private CarMapper carMapper;
 
-    public Extras mapToExtrasDto(ExtrasDto extrasDto) {
+    public Extras mapToExtras(ExtrasDto extrasDto) {
         return new Extras(extrasDto.getId(),
                 extrasDto.getName(),
                 extrasDto.getPrice(),
                 carMapper.mapToCarList(extrasDto.getCars()));
     }
 
-    public ExtrasDto mapToExtras(Extras extras) {
+    public ExtrasDto mapToExtrasDto(Extras extras) {
         return new ExtrasDto(extras.getId(),
                 extras.getName(),
                 extras.getPrice(),

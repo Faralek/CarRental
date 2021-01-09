@@ -3,10 +3,12 @@ package com.kodilla.rentalcars.mapper;
 import com.kodilla.rentalcars.domain.Car;
 import com.kodilla.rentalcars.dto.CarDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 public class CarMapper {
     @Autowired
     private ExtrasMapper extrasMapper;
