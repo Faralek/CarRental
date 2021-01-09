@@ -1,6 +1,6 @@
 package com.kodilla.rentalcars.domain;
 
-import com.kodilla.rentalcars.repository.UserRepository;
+import com.kodilla.rentalcars.repository.CartRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,22 +10,20 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserEntityTestSuite {
-
+public class CartEntityTestSuite {
     @Autowired
-    UserRepository userRepository;
-
+    CartRepository cartRepository;
     @Test
     public void createUserTestSuite(){
-        User user = new User();
-        User user1 = new User();
+        Cart cart = new Cart();
+        Cart cart1 = new Cart();
 
-        userRepository.save(user);
-        userRepository.save(user1);
-        int number = userRepository.findAll().size();
+        cartRepository.save(cart);
+        cartRepository.save(cart1);
+        int number = cartRepository.findAll().size();
 
         Assert.assertEquals(2,number);
 
-        userRepository.deleteAll();
+        cartRepository.deleteAll();
     }
 }

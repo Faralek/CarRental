@@ -1,5 +1,6 @@
 package com.kodilla.rentalcars.domain;
 
+import com.kodilla.rentalcars.repository.OrderRepository;
 import com.kodilla.rentalcars.repository.UserRepository;
 import org.junit.Assert;
 import org.junit.Test;
@@ -10,22 +11,22 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserEntityTestSuite {
+public class OrderEntityTestSuite {
 
     @Autowired
-    UserRepository userRepository;
+    OrderRepository orderRepository;
 
     @Test
     public void createUserTestSuite(){
-        User user = new User();
-        User user1 = new User();
+        Order order = new Order();
+        Order order1 = new Order();
 
-        userRepository.save(user);
-        userRepository.save(user1);
-        int number = userRepository.findAll().size();
+        orderRepository.save(order);
+        orderRepository.save(order1);
+        int number = orderRepository.findAll().size();
 
         Assert.assertEquals(2,number);
 
-        userRepository.deleteAll();
+        orderRepository.deleteAll();
     }
 }
