@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -17,5 +18,5 @@ public class ExtrasDto {
     private Long id;
     private String name;
     private BigDecimal price;
-    private List<CarDto> cars;
+    private List<CarDto> cars = new ArrayList<>();
 }

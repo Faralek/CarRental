@@ -21,5 +21,5 @@ public class CartDto {
     private BigDecimal sum = new BigDecimal(0);
     private List<CarDto> cars = new ArrayList<>();
     private List<OrderDto> orders = new ArrayList<>();
-    private User user;
+    private UserDto user;
 }

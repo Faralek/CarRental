@@ -18,8 +18,8 @@ import java.util.List;
 @NoArgsConstructor
 public class OrderDto {
     private Long id;
-    private Cart cart;
+    private CartDto cart;
     private List<CarDto> cars = new ArrayList<>();
-    private User user;
+    private UserDto user;
     private BigDecimal sum = new BigDecimal(0);
 }

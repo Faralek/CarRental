@@ -18,6 +18,6 @@ public class UserDto {
     private Long id;
     private String username;
     private String password;
-    private Cart cart;
+    private CartDto cart;
     private List<OrderDto> orders = new ArrayList<>();
 }

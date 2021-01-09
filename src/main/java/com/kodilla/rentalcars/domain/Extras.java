@@ -7,6 +7,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -18,7 +19,7 @@ public class Extras {
     private Long id;
     private String name;
     private BigDecimal price;
-    private List<Car> cars;
+    private List<Car> cars = new ArrayList<>();
 
     @Id
     @NotNull

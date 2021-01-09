@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -20,7 +21,7 @@ public class CarDto {
     private String description;
     private String name;
     private BigDecimal dailyPrice;
-    private List<ExtrasDto> extras;
-    private Cart cart;
-    private Order order;
+    private List<ExtrasDto> extras = new ArrayList<>();
+    private CartDto cart;
+    private OrderDto order;
 }

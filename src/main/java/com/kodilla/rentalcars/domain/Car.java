@@ -7,6 +7,7 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -19,7 +20,7 @@ public class Car {
     private String description;
     private String name;
     private BigDecimal dailyPrice;
-    private List<Extras> extras;
+    private List<Extras> extras = new ArrayList<>();
     private Cart cart;
     private Order order;
 
