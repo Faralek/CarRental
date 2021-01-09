@@ -1,5 +1,8 @@
 package com.kodilla.rentalcars.emailService;
 
+import com.kodilla.rentalcars.configuration.AdminConfig;
+import com.kodilla.rentalcars.domain.Car;
+import com.kodilla.rentalcars.domain.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.mail.MailException;
@@ -10,6 +13,8 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class EmailService {
 
@@ -17,6 +22,8 @@ public class EmailService {
 
     @Autowired
     private JavaMailSender javaMailSender;
+    @Autowired
+    private AdminConfig adminConfig;
 
     public void send(final Mail mail) {
         LOGGER.info("Start email preparation");
@@ -56,5 +63,23 @@ public class EmailService {
         message.setSubject(mail.getSubject());
         message.setText(mail.getMessage());
         return message;
+    }
+
+    public void sendNewOrderInformationMail(List<Car> cars, User user) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(adminConfig.getAdminMail());
+        message.setCc("");
+        message.setSubject("New order in your Application");
+        message.setText("User " + user.getUsername() + " created new order for " + cars.stream().toString());
+        javaMailSender.send(message);
+    }
+
+    public void sendDeleteOrderInformation(User user){
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(adminConfig.getAdminMail());
+        message.setCc("");
+        message.setSubject("Deleted Order");
+        message.setText("User " + user.getUsername() + " deleted his order");
+        javaMailSender.send(message);
     }
 }
