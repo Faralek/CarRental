@@ -1,7 +1,6 @@
 package com.kodilla.rentalcars.mapper;
 
 import com.kodilla.rentalcars.domain.Extras;
-import com.kodilla.rentalcars.dto.CarDto;
 import com.kodilla.rentalcars.dto.ExtrasDto;
 import org.springframework.beans.factory.annotation.Autowired;
 

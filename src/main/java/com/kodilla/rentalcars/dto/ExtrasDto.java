@@ -1,6 +1,5 @@
 package com.kodilla.rentalcars.dto;
 
-import com.kodilla.rentalcars.domain.Car;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
