@@ -24,7 +24,7 @@ public class Cart {
     private User user;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     @NotNull
     @Column(name = "ID", unique = true)
     public Long getId() {

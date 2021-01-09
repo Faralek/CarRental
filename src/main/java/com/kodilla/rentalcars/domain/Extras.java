@@ -24,7 +24,7 @@ public class Extras {
     @Id
     @NotNull
     @GeneratedValue
-    @Column(name = "EXTRAS_ID")
+    @Column(name = "ID")
     public Long getId() {
         return id;
     }
@@ -33,10 +33,12 @@ public class Extras {
     public String getName() {
         return name;
     }
+
     @Column(name = "PRICE")
     public BigDecimal getPrice() {
         return price;
     }
+
     @ManyToMany(mappedBy = "extras")
     public List<Car> getCars() {
         return cars;

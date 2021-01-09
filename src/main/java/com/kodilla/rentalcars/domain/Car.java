@@ -16,6 +16,7 @@ import java.util.List;
 @Entity
 @Table(name = "CARS")
 public class Car {
+
     private Long id;
     private String description;
     private String name;
@@ -27,7 +28,7 @@ public class Car {
     @Id
     @NotNull
     @GeneratedValue
-    @Column(name = "CAR_ID")
+    @Column(name = "ID")
     public Long getId() {
         return id;
     }
@@ -36,10 +37,12 @@ public class Car {
     public String getDescription() {
         return description;
     }
+
     @Column(name = "NAME")
     public String getName() {
         return name;
     }
+
     @Column(name = "DAILYPRICE")
     public BigDecimal getDailyPrice() {
         return dailyPrice;
@@ -47,9 +50,9 @@ public class Car {
 
     @ManyToMany
     @JoinTable(
-            name = "EXTRAS",
-            joinColumns = {@JoinColumn(name = "CAR_ID", referencedColumnName = "CAR_ID")},
-            inverseJoinColumns = {@JoinColumn(name = "EXTRAS_ID", referencedColumnName = "EXTRAS_ID")}
+            name = "JOIN_CAR_EXTRAS",
+            joinColumns = {@JoinColumn(name = "CAR_ID", referencedColumnName = "ID")},
+            inverseJoinColumns = {@JoinColumn(name = "EXTRAS_ID", referencedColumnName = "ID")}
     )
     public List<Extras> getExtras() {
         return extras;
@@ -66,5 +69,4 @@ public class Car {
     public Order getOrder() {
         return order;
     }
-
 }
