@@ -13,35 +13,35 @@ import java.util.List;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
-@RequestMapping("/v1/user")
+@RequestMapping("/v1")
 public class UserController {
     @Autowired
     private UserDbService userDbService;
     @Autowired
     private UserMapper userMapper;
 
-    @RequestMapping(method = RequestMethod.POST, value = "createUser", consumes = APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.POST, value = "/users", consumes = APPLICATION_JSON_VALUE)
     public void createUser(@RequestBody UserDto userDto) {
         userDbService.saveUser(userMapper.mapToUser(userDto));
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "updateUser")
+    @RequestMapping(method = RequestMethod.PUT, value = "/users")
     public UserDto updateUser(@RequestBody UserDto userDto) {
         return userMapper.mapToUserDto(userDbService.saveUser(userMapper.mapToUser(userDto)));
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "getUserList")
+    @RequestMapping(method = RequestMethod.GET, value = "/users")
     public List<UserDto> getUserList() {
         return userMapper.mapToUserDtoList(userDbService.getAllUsers());
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "getUser")
-    public UserDto getUser(@RequestParam Long userId) throws UserNotFoundException {
+    @RequestMapping(method = RequestMethod.GET, value = "/users/{userId}")
+    public UserDto getUser(@PathVariable Long userId) throws UserNotFoundException {
         return userMapper.mapToUserDto(userDbService.getUser(userId).orElseThrow(() -> new UserNotFoundException("Extras not found " + userId)));
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "deleteUser")
-    public void deleteUser(@RequestParam Long userId) throws UserNotFoundException {
+    @RequestMapping(method = RequestMethod.DELETE, value = "/users/{userId}")
+    public void deleteUser(@PathVariable Long userId) throws UserNotFoundException {
         try {
             userDbService.deleteById(userId);
         } catch (EmptyResultDataAccessException e) {

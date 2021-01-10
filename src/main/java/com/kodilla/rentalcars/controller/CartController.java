@@ -16,7 +16,7 @@ import java.util.List;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @RestController
-@RequestMapping("/v1/cart")
+@RequestMapping("/v1")
 public class CartController {
 
     @Autowired
@@ -26,42 +26,42 @@ public class CartController {
     @Autowired
     private CarMapper carMapper;
 
-    @RequestMapping(method = RequestMethod.POST, value = "createCart", consumes = APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.POST, value = "/carts", consumes = APPLICATION_JSON_VALUE)
     public void createCart(@RequestBody CartDto cartDto) {
         cartDbService.saveCart(cartMapper.mapToCart(cartDto));
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "updateCart")
+    @RequestMapping(method = RequestMethod.PUT, value = "/carts")
     public CartDto updateCart(@RequestBody CartDto cartDto) {
         return cartMapper.mapToCartDto(cartDbService.saveCart(cartMapper.mapToCart(cartDto)));
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "addCar")
+    @RequestMapping(method = RequestMethod.POST, value = "/carts/addCar")
     public void addCar(@RequestParam int duration, @RequestBody CarDto carDto, @RequestParam Long id) {
         Cart cart = cartDbService.getCartById(id).get();
         cartDbService.getCartById(id).get().addCar(carMapper.mapToCar(carDto), duration);
         cartDbService.saveCart(cart);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "removeCar")
+    @RequestMapping(method = RequestMethod.DELETE, value = "/carts/removeCar")
     public void removeCar(@RequestParam int duration, @RequestBody CarDto carDto, @RequestParam Long id) {
         Cart cart = cartDbService.getCartById(id).get();
         cartDbService.getCartById(id).get().removeCar(carMapper.mapToCar(carDto), duration);
         cartDbService.saveCart(cart);
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "getCarts")
+    @RequestMapping(method = RequestMethod.GET, value = "/carts")
     public List<CartDto> getCarts() {
         return cartMapper.mapToCartDtoList(cartDbService.getAllCarts());
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "getCart")
-    public CartDto getCart(@RequestParam Long cartId) throws CartNotFoundException {
+    @RequestMapping(method = RequestMethod.GET, value = "/carts/{cartId}")
+    public CartDto getCart(@PathVariable Long cartId) throws CartNotFoundException {
         return cartMapper.mapToCartDto(cartDbService.getCartById(cartId).orElseThrow(() -> new CartNotFoundException("Cart not found " + cartId)));
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, value = "deleteCart")
-    public void deleteCar(@RequestParam Long cartId) throws CartNotFoundException {
+    @RequestMapping(method = RequestMethod.DELETE, value = "/carts/{cartId}")
+    public void deleteCar(@PathVariable Long cartId) throws CartNotFoundException {
         try {
             cartDbService.deleteById(cartId);
         } catch (EmptyResultDataAccessException e) {
