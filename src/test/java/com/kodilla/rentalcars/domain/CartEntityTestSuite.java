@@ -14,16 +14,20 @@ public class CartEntityTestSuite {
     @Autowired
     CartRepository cartRepository;
     @Test
-    public void createUserTestSuite(){
+    public void createCartTestSuite(){
+        //GIVEN
         Cart cart = new Cart();
         Cart cart1 = new Cart();
 
+        //WHEN
         cartRepository.save(cart);
         cartRepository.save(cart1);
         int number = cartRepository.findAll().size();
 
+        //THEN
         Assert.assertEquals(2,number);
 
+        //CLEAN
         cartRepository.deleteAll();
     }
 }

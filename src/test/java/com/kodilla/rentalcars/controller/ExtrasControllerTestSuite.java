@@ -86,6 +86,7 @@ public class ExtrasControllerTestSuite {
         when(extrasDbService.getExtrasById(1L)).thenReturn(Optional.of(extras));
         when(extrasMapper.mapToExtrasDto(any(Extras.class))).thenReturn(extrasDto);
 
+        //When & Then
         mockMvc.perform(get("/v1/extras/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))

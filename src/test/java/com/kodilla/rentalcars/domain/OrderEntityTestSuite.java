@@ -16,16 +16,20 @@ public class OrderEntityTestSuite {
     OrderRepository orderRepository;
 
     @Test
-    public void createUserTestSuite(){
+    public void createOrderTestSuite(){
+        //GIVEN
         Order order = new Order();
         Order order1 = new Order();
 
+        //WHEN
         orderRepository.save(order);
         orderRepository.save(order1);
         int number = orderRepository.findAll().size();
 
+        //THEN
         Assert.assertEquals(2,number);
 
+        //CLEAN
         orderRepository.deleteAll();
     }
 }

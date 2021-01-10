@@ -95,6 +95,7 @@ public class CartControllerTestSuite {
         when(cartDbService.getCartById(1L)).thenReturn(Optional.of(cart));
         when(cartMapper.mapToCartDto(any(Cart.class))).thenReturn(cartDto);
 
+        //When & Then
         mockMvc.perform(get("/v1/carts/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))

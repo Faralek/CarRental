@@ -90,6 +90,7 @@ public class UserControllerTestSuite {
         when(userDbService.getUser(1L)).thenReturn(Optional.of(user));
         when(userMapper.mapToUserDto(any(User.class))).thenReturn(userDto);
 
+        //When & Then
         mockMvc.perform(get("/v1/users/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))

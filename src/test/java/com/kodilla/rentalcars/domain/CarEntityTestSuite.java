@@ -15,15 +15,19 @@ public class CarEntityTestSuite {
     CarRepository carRepository;
     @Test
     public void createCarTestSuite(){
+        //GIVEN
         Car car = new Car();
         Car car1 = new Car();
 
+        //WHEN
         carRepository.save(car);
         carRepository.save(car1);
         int number = carRepository.findAll().size();
 
+        //THEN
         Assert.assertEquals(2,number);
 
+        //CLEAN
         carRepository.deleteAll();
     }
 }

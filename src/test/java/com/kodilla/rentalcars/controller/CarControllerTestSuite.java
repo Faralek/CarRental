@@ -76,6 +76,7 @@ public class CarControllerTestSuite {
 
         when(carDbService.getAllCars()).thenReturn(carList);
         when(carMapper.mapToCarDtoList(carList)).thenReturn(carDtoList);
+
         //When & Then
         mockMvc.perform(get("/v1/cars").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -101,6 +102,7 @@ public class CarControllerTestSuite {
         when(carDbService.getCarById(1L)).thenReturn(Optional.of(car));
         when(carMapper.mapToCarDto(any(Car.class))).thenReturn(carDto);
 
+        //When & Then
         mockMvc.perform(get("/v1/cars/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
@@ -173,7 +175,6 @@ public class CarControllerTestSuite {
         String jsonContent = gson.toJson(carDto);
 
         //When & Then
-
         mockMvc.perform(post("/v1/cars")
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")

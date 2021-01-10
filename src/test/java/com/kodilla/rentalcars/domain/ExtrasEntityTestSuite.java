@@ -14,16 +14,20 @@ public class ExtrasEntityTestSuite {
     @Autowired
     ExtrasRepository extrasRepository;
     @Test
-    public void createUserTestSuite(){
+    public void createExtrasTestSuite(){
+        //GIVEN
         Extras extras = new Extras();
         Extras extras1 = new Extras();
 
+        //WHEN
         extrasRepository.save(extras);
         extrasRepository.save(extras1);
         int number = extrasRepository.findAll().size();
 
+        //THEN
         Assert.assertEquals(2,number);
 
+        //CLEAN
         extrasRepository.deleteAll();
     }
 }

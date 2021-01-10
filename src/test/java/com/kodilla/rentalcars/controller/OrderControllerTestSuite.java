@@ -45,7 +45,6 @@ public class OrderControllerTestSuite {
 
     @Test
     public void shouldCreateEmptyOrderList() throws Exception {
-
         //Given
         List<OrderDto> orderDtoList = new ArrayList<>();
         List<Order> orderList = new ArrayList<>();
@@ -97,6 +96,7 @@ public class OrderControllerTestSuite {
         when(orderServiceFacade.getOrder(1L)).thenReturn(Optional.of(order));
         when(orderMapper.mapToOrderDto(any(Order.class))).thenReturn(orderDto);
 
+        //When & Then
         mockMvc.perform(get("/v1/orders/1").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)))
