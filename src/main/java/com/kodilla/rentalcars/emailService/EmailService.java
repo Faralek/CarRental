@@ -74,7 +74,7 @@ public class EmailService {
         javaMailSender.send(message);
     }
 
-    public void sendDeleteOrderInformation(User user){
+    public void sendDeleteOrderInformation(User user) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(adminConfig.getAdminMail());
         message.setCc("");
