@@ -18,7 +18,7 @@ public class CarDto {
     private String description;
     private String name;
     private BigDecimal dailyPrice;
-    private List<ExtrasDto> extras = new ArrayList<>();
+    private List<ExtrasDto> extrasList = new ArrayList<>();
     private CartDto cart;
     private OrderDto order;
 }

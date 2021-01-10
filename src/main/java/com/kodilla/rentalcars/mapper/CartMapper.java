@@ -34,16 +34,6 @@ public class CartMapper {
                 userMapper.mapToUserDto(cart.getUser()));
     }
 
-    public List<Cart> mapToCartList(List<CartDto> cartDtos) {
-        return cartDtos.stream()
-                .map(c -> new Cart(c.getId(),
-                        c.getSum(),
-                        carMapper.mapToCarList(c.getCars()),
-                        orderMapper.mapToOrderList(c.getOrders()),
-                        userMapper.mapToUser(c.getUser())))
-                .collect(Collectors.toList());
-    }
-
     public List<CartDto> mapToCartDtoList(List<Cart> carts) {
         return carts.stream()
                 .map(c -> new CartDto(c.getId(),

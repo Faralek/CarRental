@@ -31,16 +31,6 @@ public class UserMapper {
                 orderMapper.mapToOrderDtoList(user.getOrders()));
     }
 
-    public List<User> mapToUserList(List<UserDto> userDtoList) {
-        return userDtoList.stream()
-                .map(u -> new User(u.getId(),
-                        u.getUsername(),
-                        u.getPassword(),
-                        cartMapper.mapToCart(u.getCart()),
-                        orderMapper.mapToOrderList(u.getOrders())))
-                .collect(Collectors.toList());
-    }
-
     public List<UserDto> mapToUserDtoList(List<User> users) {
         return users.stream()
                 .map(u -> new UserDto(u.getId(),
