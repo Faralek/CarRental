@@ -16,6 +16,8 @@ public class CarEntityTestSuite {
     @Test
     public void createCarTestSuite(){
         //GIVEN
+        carRepository.deleteAll();
+
         Car car = new Car();
         Car car1 = new Car();
 

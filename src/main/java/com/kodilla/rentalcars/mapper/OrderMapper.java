@@ -2,9 +2,11 @@ package com.kodilla.rentalcars.mapper;
 
 import com.kodilla.rentalcars.domain.Order;
 import com.kodilla.rentalcars.dto.OrderDto;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -17,38 +19,35 @@ public class OrderMapper {
     @Autowired
     private UserMapper userMapper;
 
+    private final ModelMapper modelMapper = new ModelMapper();
+
     public Order mapToOrder(OrderDto orderDto) {
-        return new Order(orderDto.getId(),
-                cartMapper.mapToCart(orderDto.getCart()),
-                carMapper.mapToCarList(orderDto.getCars()),
-                userMapper.mapToUser(orderDto.getUser()),
-                orderDto.getSum());
+        Order order = modelMapper.map(orderDto, Order.class);
+        return order;
     }
 
     public OrderDto mapToOrderDto(Order order) {
-        return new OrderDto(order.getId(),
-                cartMapper.mapToCartDto(order.getCart()),
-                carMapper.mapToCarDtoList(order.getCars()),
-                userMapper.mapToUserDto(order.getUser()),
-                order.getSum());
+        OrderDto orderDto = modelMapper.map(order, OrderDto.class);
+        return orderDto;
     }
 
-    public List<Order> mapToOrderList(List<OrderDto> orderDtos){
-        return orderDtos.stream()
-                .map(o -> new Order(o.getId(),
-                        cartMapper.mapToCart(o.getCart()),
-                        carMapper.mapToCarList(o.getCars()),
-                        userMapper.mapToUser(o.getUser()),
-                        o.getSum()))
-                .collect(Collectors.toList());
+    public List<Order> mapToOrderList(final List<OrderDto> orderDtos) {
+        if (orderDtos.isEmpty()) {
+            return new ArrayList<>();
+        } else {
+            return orderDtos.stream()
+                    .map(this::mapToOrder)
+                    .collect(Collectors.toList());
+        }
     }
-    public List<OrderDto> mapToOrderDtoList(List<Order> orders){
-        return orders.stream()
-                .map(o -> new OrderDto(o.getId(),
-                        cartMapper.mapToCartDto(o.getCart()),
-                        carMapper.mapToCarDtoList(o.getCars()),
-                        userMapper.mapToUserDto(o.getUser()),
-                        o.getSum()))
-                .collect(Collectors.toList());
+
+    public List<OrderDto> mapToOrderDtoList(final List<Order> orders) {
+        if (orders.isEmpty()) {
+            return new ArrayList<>();
+        } else {
+            return orders.stream()
+                    .map(this::mapToOrderDto)
+                    .collect(Collectors.toList());
+        }
     }
 }

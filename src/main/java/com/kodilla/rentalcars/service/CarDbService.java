@@ -22,7 +22,7 @@ public class CarDbService {
         return carRepository.findAll();
     }
 
-    public Car saveCar(final Car car){
+    public Car saveCar(Car car){
         logService.saveLog(new Log("Created new car" , LocalDate.now()));
         return carRepository.save(car);
     }

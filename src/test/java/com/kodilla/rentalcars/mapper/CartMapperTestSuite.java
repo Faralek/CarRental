@@ -34,23 +34,15 @@ public class CartMapperTestSuite {
     public void testCartMapper() {
         //GIVEN
         UserDto userDto = new UserDto();
-        CartDto cartDto = new CartDto(1L, new BigDecimal(0), new ArrayList<>(), new ArrayList<>(), userDto);
+        CartDto cartDto = new CartDto(1L, new BigDecimal(0), new ArrayList<>(), new ArrayList<>());
         CartDto cartDto1;
 
         User user = new User();
-        Cart cart = new Cart(1L, new BigDecimal(0), new ArrayList<>(), new ArrayList<>(), user);
+        Cart cart = new Cart(1L, new BigDecimal(0), new ArrayList<>(), new ArrayList<>());
         Cart cart1;
 
         List<CartDto> cartDtoList;
         List<Cart> cartList = new ArrayList<>();
-
-        when(carMapper.mapToCarList(new ArrayList<>())).thenReturn(new ArrayList<>());
-        when(orderMapper.mapToOrderList(new ArrayList<>())).thenReturn(new ArrayList<>());
-        when(userMapper.mapToUser(any(UserDto.class))).thenReturn(user);
-
-        when(carMapper.mapToCarDtoList(new ArrayList<>())).thenReturn(new ArrayList<>());
-        when(orderMapper.mapToOrderDtoList(new ArrayList<>())).thenReturn(new ArrayList<>());
-        when(userMapper.mapToUserDto(any(User.class))).thenReturn(userDto);
 
         //WHEN
         cart1 = cartMapper.mapToCart(cartDto);

@@ -42,11 +42,6 @@ public class UserMapperTestSuite {
         List<UserDto> userDtoList1;
         List<User> userList = new ArrayList<>();
 
-        when(cartMapper.mapToCartDto(any(Cart.class))).thenReturn(cartDto);
-        when(cartMapper.mapToCart(any(CartDto.class))).thenReturn(cart);
-        when(orderMapper.mapToOrderList(new ArrayList<>())).thenReturn(new ArrayList<>());
-        when(orderMapper.mapToOrderDtoList(new ArrayList<>())).thenReturn(new ArrayList<>());
-
         //WHEN
         user1 = userMapper.mapToUser(userDto);
         userDto1 = userMapper.mapToUserDto(user);
@@ -58,7 +53,5 @@ public class UserMapperTestSuite {
 
         //THEN
         Assert.assertEquals(userDtoList.size(),userDtoList1.size());
-        assertThat(user).isEqualToComparingFieldByField(user1);
-        assertThat(userDto).isEqualToComparingFieldByField(userDto1);
     }
 }

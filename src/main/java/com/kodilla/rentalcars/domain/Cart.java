@@ -1,6 +1,10 @@
 package com.kodilla.rentalcars.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,6 +28,13 @@ public class Cart {
     private List<Order> orders = new ArrayList<>();
     private User user;
 
+    public Cart(Long id, BigDecimal sum, List<Car> cars, List<Order> orders) {
+        this.id = id;
+        this.sum = sum;
+        this.cars = cars;
+        this.orders = orders;
+    }
+
     @Id
     @GeneratedValue
     @NotNull
@@ -38,21 +49,24 @@ public class Cart {
     }
 
     @OneToMany(
+            cascade = CascadeType.ALL,
             targetEntity = Car.class,
             mappedBy = "cart",
             fetch = FetchType.LAZY
     )
+    @JsonManagedReference
     public List<Car> getCars() {
         return cars;
     }
-
-    @OneToMany(targetEntity = Order.class, mappedBy = "cart", fetch = FetchType.LAZY)
+    @JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL, targetEntity = Order.class, mappedBy = "cart", fetch = FetchType.LAZY)
     public List<Order> getOrders() {
         return orders;
     }
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "USER_ID")
+    @JsonBackReference
     public User getUser() {
         return user;
     }

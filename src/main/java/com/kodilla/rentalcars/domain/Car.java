@@ -1,9 +1,12 @@
 package com.kodilla.rentalcars.domain;
 
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.kodilla.rentalcars.exception.ExtrasNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -25,6 +28,14 @@ public class Car {
     private List<Extras> extrasList = new ArrayList<>();
     private Cart cart;
     private Order order;
+
+    public Car(Long id, String description, String name, BigDecimal dailyPrice, List<Extras> extrasList) {
+        this.id = id;
+        this.description = description;
+        this.name = name;
+        this.dailyPrice = dailyPrice;
+        this.extrasList = extrasList;
+    }
 
     @Id
     @NotNull
@@ -55,18 +66,21 @@ public class Car {
             joinColumns = {@JoinColumn(name = "CAR_ID", referencedColumnName = "ID")},
             inverseJoinColumns = {@JoinColumn(name = "EXTRAS_ID", referencedColumnName = "ID")}
     )
+    @JsonManagedReference
     public List<Extras> getExtrasList() {
         return extrasList;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "CART")
+    @JsonBackReference
     public Cart getCart() {
         return cart;
     }
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ORDER")
+    @JsonBackReference
     public Order getOrder() {
         return order;
     }

@@ -64,7 +64,7 @@ public class OrderControllerTestSuite {
         List<OrderDto> orderDtoList = new ArrayList<>();
         CartDto cartDto = new CartDto();
         UserDto userDto = new UserDto();
-        orderDtoList.add(new OrderDto(1L, cartDto, new ArrayList<>(), userDto, new BigDecimal(0)));
+        orderDtoList.add(new OrderDto(1L, cartDto, new ArrayList<>(), new BigDecimal(0)));
 
         List<Order> orderList = new ArrayList<>();
         Cart cart = new Cart();
@@ -87,7 +87,7 @@ public class OrderControllerTestSuite {
         //Given
         CartDto cartDto = new CartDto();
         UserDto userDto = new UserDto();
-        OrderDto orderDto = new OrderDto(1L, cartDto, new ArrayList<>(), userDto, new BigDecimal(0));
+        OrderDto orderDto = new OrderDto(1L, cartDto, new ArrayList<>(), new BigDecimal(0));
 
         Cart cart = new Cart();
         User user = new User();
@@ -123,7 +123,7 @@ public class OrderControllerTestSuite {
         //Given
         CartDto cartDto = new CartDto();
         UserDto userDto = new UserDto();
-        OrderDto orderDto = new OrderDto(1L, cartDto, new ArrayList<>(), userDto, new BigDecimal(0));
+        OrderDto orderDto = new OrderDto(1L, cartDto, new ArrayList<>(), new BigDecimal(0));
 
         Cart cart = new Cart();
         User user = new User();
@@ -151,7 +151,7 @@ public class OrderControllerTestSuite {
         //Given
         CartDto cartDto = new CartDto();
         UserDto userDto = new UserDto();
-        OrderDto orderDto = new OrderDto(1L, cartDto, new ArrayList<>(), userDto, new BigDecimal(0));
+        OrderDto orderDto = new OrderDto(1L, cartDto, new ArrayList<>(), new BigDecimal(0));
 
         Cart cart = new Cart();
         User user = new User();

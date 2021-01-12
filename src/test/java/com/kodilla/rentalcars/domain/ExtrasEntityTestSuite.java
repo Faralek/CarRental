@@ -16,6 +16,8 @@ public class ExtrasEntityTestSuite {
     @Test
     public void createExtrasTestSuite(){
         //GIVEN
+        extrasRepository.deleteAll();
+
         Extras extras = new Extras();
         Extras extras1 = new Extras();
 

@@ -2,65 +2,49 @@ package com.kodilla.rentalcars.mapper;
 
 import com.kodilla.rentalcars.domain.Car;
 import com.kodilla.rentalcars.dto.CarDto;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
 public class CarMapper {
-    @Autowired
-    private ExtrasMapper extrasMapper;
-    @Autowired
-    private CartMapper cartMapper;
-    @Autowired
-    private OrderMapper orderMapper;
+
+    private final ModelMapper modelMapper = new ModelMapper();
 
     public CarDto mapToCarDto(Car car) {
-        return new CarDto(car.getId(),
-                car.getDescription(),
-                car.getName(),
-                car.getDailyPrice(),
-                extrasMapper.mapToExtrasDtoList(car.getExtrasList()),
-                cartMapper.mapToCartDto(car.getCart()),
-                orderMapper.mapToOrderDto(car.getOrder()));
+        CarDto carDto = modelMapper.map(car, CarDto.class);
+        return carDto;
     }
+
 
     public Car mapToCar(CarDto carDto) {
-        return new Car(carDto.getId(),
-                carDto.getDescription(),
-                carDto.getName(),
-                carDto.getDailyPrice(),
-                extrasMapper.mapToExtrasList(carDto.getExtrasList()),
-                cartMapper.mapToCart(carDto.getCart()),
-                orderMapper.mapToOrder(carDto.getOrder()));
+        Car car = modelMapper.map(carDto, Car.class);
+        return car;
     }
 
-    public List<Car> mapToCarList(List<CarDto> carDtos) {
-        return carDtos.stream()
-                .map(c -> new Car(
-                        c.getId(),
-                        c.getDescription(),
-                        c.getName(),
-                        c.getDailyPrice(),
-                        extrasMapper.mapToExtrasList(c.getExtrasList()),
-                        cartMapper.mapToCart(c.getCart()),
-                        orderMapper.mapToOrder(c.getOrder())))
-                .collect(Collectors.toList());
+    public List<Car> mapToCarList(final List<CarDto> carDtos) {
+        if (carDtos.isEmpty()) {
+            return new ArrayList<>();
+        } else {
+            return carDtos.stream()
+                    .map(this::mapToCar)
+                    .collect(Collectors.toList());
+        }
     }
 
-    public List<CarDto> mapToCarDtoList(List<Car> cars) {
-        return cars.stream()
-                .map(c -> new CarDto(
-                        c.getId(),
-                        c.getDescription(),
-                        c.getName(),
-                        c.getDailyPrice(),
-                        extrasMapper.mapToExtrasDtoList(c.getExtrasList()),
-                        cartMapper.mapToCartDto(c.getCart()),
-                        orderMapper.mapToOrderDto(c.getOrder())))
-                .collect(Collectors.toList());
+    public List<CarDto> mapToCarDtoList(final List<Car> cars) {
+        if (cars.isEmpty()) {
+            return new ArrayList<>();
+        } else {
+            return cars.stream()
+                    .map(this::mapToCarDto)
+                    .collect(Collectors.toList());
+        }
     }
 }
 

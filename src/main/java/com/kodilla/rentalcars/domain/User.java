@@ -1,5 +1,8 @@
 package com.kodilla.rentalcars.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -43,11 +46,13 @@ public class User {
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "CART", referencedColumnName = "ID")
+    @JsonManagedReference
     public Cart getCart() {
         return cart;
     }
 
     @OneToMany(targetEntity = Order.class, mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonManagedReference
     public List<Order> getOrders() {
         return orders;
     }

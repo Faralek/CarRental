@@ -1,5 +1,9 @@
 package com.kodilla.rentalcars.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,6 +27,13 @@ public class Order {
     private User user;
     private BigDecimal sum = new BigDecimal(0);
 
+    public Order(Long id, Cart cart, List<Car> cars, BigDecimal sum) {
+        this.id = id;
+        this.cart = cart;
+        this.cars = cars;
+        this.sum = sum;
+    }
+
     @Id
     @NotNull
     @GeneratedValue
@@ -33,6 +44,7 @@ public class Order {
 
     @ManyToOne
     @JoinColumn(name = "CART_ID")
+    @JsonBackReference
     public Cart getCart() {
         return cart;
     }
@@ -42,12 +54,14 @@ public class Order {
             mappedBy = "order",
             fetch = FetchType.LAZY
     )
+    @JsonManagedReference
     public List<Car> getCars() {
         return cars;
     }
 
     @ManyToOne
     @JoinColumn(name = "USER_ID")
+    @JsonBackReference
     public User getUser() {
         return user;
     }

@@ -18,6 +18,8 @@ public class UserEntityTestSuite {
     @Test
     public void createUserTestSuite(){
         //GIVEN
+        userRepository.deleteAll();
+
         User user = new User();
         User user1 = new User();
 

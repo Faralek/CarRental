@@ -37,9 +37,6 @@ public class ExtrasMapperTestSuite {
         List<Extras> extrasList = new ArrayList<>();
         List<Extras> extrasList1;
 
-        when(carMapper.mapToCarList(new ArrayList<>())).thenReturn(new ArrayList<>());
-        when(carMapper.mapToCarDtoList(new ArrayList<>())).thenReturn(new ArrayList<>());
-
         //WHEN
         extras1 = extrasMapper.mapToExtras(extrasDto);
         extrasDto1 = extrasMapper.mapToExtrasDto(extras);

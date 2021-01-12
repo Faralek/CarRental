@@ -2,42 +2,37 @@ package com.kodilla.rentalcars.mapper;
 
 import com.kodilla.rentalcars.domain.User;
 import com.kodilla.rentalcars.dto.UserDto;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
 public class UserMapper {
-    @Autowired
-    private CartMapper cartMapper;
-    @Autowired
-    private OrderMapper orderMapper;
+
+    private final ModelMapper modelMapper = new ModelMapper();
 
     public User mapToUser(UserDto userDto) {
-        return new User(userDto.getId(),
-                userDto.getUsername(),
-                userDto.getPassword(),
-                cartMapper.mapToCart(userDto.getCart()),
-                orderMapper.mapToOrderList(userDto.getOrders()));
+        User user = modelMapper.map(userDto, User.class);
+        return user;
     }
 
     public UserDto mapToUserDto(User user) {
-        return new UserDto(user.getId(),
-                user.getUsername(),
-                user.getPassword(),
-                cartMapper.mapToCartDto(user.getCart()),
-                orderMapper.mapToOrderDtoList(user.getOrders()));
+        UserDto userDto = modelMapper.map(user, UserDto.class);
+        return userDto;
     }
 
-    public List<UserDto> mapToUserDtoList(List<User> users) {
-        return users.stream()
-                .map(u -> new UserDto(u.getId(),
-                        u.getUsername(),
-                        u.getPassword(),
-                        cartMapper.mapToCartDto(u.getCart()),
-                        orderMapper.mapToOrderDtoList(u.getOrders())))
-                .collect(Collectors.toList());
+    public List<UserDto> mapToUserDtoList(final List<User> users) {
+        if (users.isEmpty()) {
+            return new ArrayList<>();
+        } else {
+            return users.stream()
+                    .map(this::mapToUserDto)
+                    .collect(Collectors.toList());
+        }
     }
+
 }

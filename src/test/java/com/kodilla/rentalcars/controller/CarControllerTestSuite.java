@@ -46,7 +46,7 @@ public class CarControllerTestSuite {
     private ExtrasMapper extrasMapper;
 
     @Test
-    public void shouldCreateEmptyUserList() throws Exception {
+    public void shouldCreateEmptyCarList() throws Exception {
 
         //Given
         List<CarDto> carDtoList = new ArrayList<>();
@@ -62,12 +62,12 @@ public class CarControllerTestSuite {
     }
 
     @Test
-    public void shouldGetUserList() throws Exception {
+    public void shouldGetCarList() throws Exception {
         //Given
         List<CarDto> carDtoList = new ArrayList<>();
         OrderDto orderDto = new OrderDto();
         CartDto cartDto = new CartDto();
-        carDtoList.add(new CarDto(1L, "description", "name", new BigDecimal(0), new ArrayList<>(), cartDto, orderDto));
+        carDtoList.add(new CarDto(1L, "description", "name", new BigDecimal(0), new ArrayList<>()));
 
         List<Car> carList = new ArrayList<>();
         Cart cart = new Cart();
@@ -88,12 +88,12 @@ public class CarControllerTestSuite {
     }
 
     @Test
-    public void shouldGetUser() throws Exception {
+    public void shouldGetCar() throws Exception {
 
         //Given
         OrderDto orderDto = new OrderDto();
         CartDto cartDto = new CartDto();
-        CarDto carDto = new CarDto(1L, "description", "name", new BigDecimal(0), new ArrayList<>(), cartDto, orderDto);
+        CarDto carDto = new CarDto(1L, "description", "name", new BigDecimal(0), new ArrayList<>());
 
         Cart cart = new Cart();
         Order order = new Order();
@@ -112,7 +112,7 @@ public class CarControllerTestSuite {
     }
 
     @Test
-    public void shouldDeleteUser() throws Exception {
+    public void shouldDeleteCar() throws Exception {
         //Given
         Cart cart = new Cart();
         Order order = new Order();
@@ -127,11 +127,11 @@ public class CarControllerTestSuite {
     }
 
     @Test
-    public void shouldUpdateUser() throws Exception {
+    public void shouldUpdateCar() throws Exception {
         //Given
         OrderDto orderDto = new OrderDto();
         CartDto cartDto = new CartDto();
-        CarDto carDto = new CarDto(1L, "description", "name", new BigDecimal(0), new ArrayList<>(), cartDto, orderDto);
+        CarDto carDto = new CarDto(1L, "description", "name", new BigDecimal(0), new ArrayList<>());
 
         Cart cart = new Cart();
         Order order = new Order();
@@ -156,12 +156,12 @@ public class CarControllerTestSuite {
     }
 
     @Test
-    public void shouldCreateUser() throws Exception {
+    public void shouldCreateCar() throws Exception {
 
         //Given
         OrderDto orderDto = new OrderDto();
         CartDto cartDto = new CartDto();
-        CarDto carDto = new CarDto(1L, "description", "name", new BigDecimal(0), new ArrayList<>(), cartDto, orderDto);
+        CarDto carDto = new CarDto(1L, "description", "name", new BigDecimal(0), new ArrayList<>());
 
         Cart cart = new Cart();
         Order order = new Order();

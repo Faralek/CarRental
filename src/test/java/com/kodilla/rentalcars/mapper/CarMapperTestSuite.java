@@ -26,24 +26,18 @@ public class CarMapperTestSuite {
 
     @InjectMocks
     private CarMapper carMapper;
-    @Mock
-    private ExtrasMapper extrasMapper;
-    @Mock
-    private CartMapper cartMapper;
-    @Mock
-    private OrderMapper orderMapper;
 
     @Test
     public void testCarMapper() {
         //Given
         OrderDto orderDto = new OrderDto();
         CartDto cartDto = new CartDto();
-        CarDto carDto = new CarDto(1L, "description", "name", new BigDecimal(0), new ArrayList<>(), cartDto, orderDto);
+        CarDto carDto = new CarDto(1L, "description", "name", new BigDecimal(0), new ArrayList<>());
 
 
         Cart cart = new Cart();
         Order order = new Order();
-        Car car = new Car(1L, "description", "name", new BigDecimal(0), new ArrayList<>(), cart, order);
+        Car car = new Car(1L, "description", "name", new BigDecimal(0), new ArrayList<>());
 
         List<CarDto> carDtoList = new ArrayList<>();
         List<CarDto> carDtoList1;
@@ -52,14 +46,6 @@ public class CarMapperTestSuite {
 
         carDtoList.add(carDto);
         carList.add(car);
-
-        when(extrasMapper.mapToExtrasDtoList(new ArrayList<>())).thenReturn(new ArrayList<>());
-        when(cartMapper.mapToCartDto(any(Cart.class))).thenReturn(cartDto);
-        when(orderMapper.mapToOrderDto(any(Order.class))).thenReturn(orderDto);
-
-        when(extrasMapper.mapToExtrasList(new ArrayList<>())).thenReturn(new ArrayList<>());
-        when(cartMapper.mapToCart(any(CartDto.class))).thenReturn(cart);
-        when(orderMapper.mapToOrder(any(OrderDto.class))).thenReturn(order);
 
         //WHEN
         CarDto carDto1 = carMapper.mapToCarDto(car);

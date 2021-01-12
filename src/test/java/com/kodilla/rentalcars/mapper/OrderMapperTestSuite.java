@@ -38,25 +38,18 @@ public class OrderMapperTestSuite {
         //Given
         CartDto cartDto = new CartDto();
         UserDto userDto = new UserDto();
-        OrderDto orderDto = new OrderDto(1L, cartDto, new ArrayList<>(), userDto, new BigDecimal(0));
+        OrderDto orderDto = new OrderDto(1L, cartDto, new ArrayList<>(), new BigDecimal(0));
         OrderDto orderDto1;
 
         Cart cart = new Cart();
         User user = new User();
-        Order order = new Order(1L, cart, new ArrayList<>(), user , new BigDecimal(0));
+        Order order = new Order(1L, cart, new ArrayList<>(), new BigDecimal(0));
         Order order1;
 
         List<OrderDto> orderDtoList = new ArrayList<>();
         List<OrderDto> orderDtoList1;
         List<Order> orderList = new ArrayList<>();
         List<Order> orderList1;
-
-        when(cartMapper.mapToCartDto(any(Cart.class))).thenReturn(cartDto);
-        when(cartMapper.mapToCart(any(CartDto.class))).thenReturn(cart);
-        when(carMapper.mapToCarList(new ArrayList<>())).thenReturn(new ArrayList<>());
-        when(carMapper.mapToCarDtoList(new ArrayList<>())).thenReturn(new ArrayList<>());
-        when(userMapper.mapToUser(any(UserDto.class))).thenReturn(user);
-        when(userMapper.mapToUserDto(any(User.class))).thenReturn(userDto);
 
         //WHEN
         order1 = orderMapper.mapToOrder(orderDto);
@@ -71,7 +64,5 @@ public class OrderMapperTestSuite {
         //THEN
         Assert.assertEquals(orderDtoList1.size(),orderList.size());
         Assert.assertEquals(orderList1.size(),orderList.size());
-        assertThat(order).isEqualToComparingFieldByField(order1);
-        assertThat(orderDto).isEqualToComparingFieldByField(orderDto1);
     }
 }

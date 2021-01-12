@@ -17,6 +17,5 @@ public class OrderDto {
     private Long id;
     private CartDto cart;
     private List<CarDto> cars = new ArrayList<>();
-    private UserDto user;
     private BigDecimal sum = new BigDecimal(0);
 }

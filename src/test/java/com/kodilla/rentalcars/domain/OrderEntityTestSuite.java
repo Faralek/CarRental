@@ -18,6 +18,8 @@ public class OrderEntityTestSuite {
     @Test
     public void createOrderTestSuite(){
         //GIVEN
+        orderRepository.deleteAll();
+
         Order order = new Order();
         Order order1 = new Order();
 

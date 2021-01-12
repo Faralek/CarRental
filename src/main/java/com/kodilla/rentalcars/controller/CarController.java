@@ -28,8 +28,8 @@ public class CarController {
     private ExtrasMapper extrasMapper;
 
     @RequestMapping(method = RequestMethod.POST, value = "/cars", consumes = APPLICATION_JSON_VALUE)
-    public void createCar(@RequestBody CarDto carDto) {
-        carDbService.saveCar(carMapper.mapToCar(carDto));
+    public CarDto createCar(@RequestBody CarDto carDto) {
+        return carMapper.mapToCarDto(carDbService.saveCar(carMapper.mapToCar(carDto)));
     }
 
     @RequestMapping(method = RequestMethod.PUT, value = "/cars")
@@ -58,14 +58,14 @@ public class CarController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/cars/{carId}")
     public CarDto getCar(@PathVariable Long carId) throws CarNotFoundException {
-        return carMapper.mapToCarDto(carDbService.getCarById(carId).orElseThrow(()-> new CarNotFoundException("Cart not found "+ carId)));
+        return carMapper.mapToCarDto(carDbService.getCarById(carId).orElseThrow(() -> new CarNotFoundException("Cart not found " + carId)));
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/cars/{carId}")
     public void deleteCar(@PathVariable Long carId) throws CarNotFoundException {
-        try{
+        try {
             carDbService.deleteById(carId);
-        } catch (EmptyResultDataAccessException e){
+        } catch (EmptyResultDataAccessException e) {
             throw new CarNotFoundException("Car not found " + carId, e);
         }
     }
