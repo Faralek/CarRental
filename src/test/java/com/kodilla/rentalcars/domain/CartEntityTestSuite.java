@@ -16,6 +16,8 @@ public class CartEntityTestSuite {
     @Test
     public void createCartTestSuite(){
         //GIVEN
+        cartRepository.deleteAll();
+
         Cart cart = new Cart();
         Cart cart1 = new Cart();
 

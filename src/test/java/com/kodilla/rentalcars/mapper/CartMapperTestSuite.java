@@ -26,11 +26,11 @@ public class CartMapperTestSuite {
     public void testCartMapper() {
         //GIVEN
         UserDto userDto = new UserDto();
-        CartDto cartDto = new CartDto(1L, new BigDecimal(0), new ArrayList<>(), new ArrayList<>());
+        CartDto cartDto = new CartDto(1L, new BigDecimal(0), new ArrayList<>(), new ArrayList<>(), userDto);
         CartDto cartDto1;
 
         User user = new User();
-        Cart cart = new Cart(1L, new BigDecimal(0), new ArrayList<>(), new ArrayList<>());
+        Cart cart = new Cart(1L, new BigDecimal(0), new ArrayList<>(), new ArrayList<>(), user);
         Cart cart1;
 
         List<CartDto> cartDtoList;
@@ -45,8 +45,6 @@ public class CartMapperTestSuite {
 
         //THEN
         Assert.assertEquals(cartDtoList.size(),cartList.size());
-        assertThat(cart).isEqualToComparingFieldByField(cart1);
-        assertThat(cartDto).isEqualToComparingFieldByField(cartDto1);
 
     }
 }

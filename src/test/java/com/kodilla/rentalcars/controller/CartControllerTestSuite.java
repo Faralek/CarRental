@@ -64,7 +64,7 @@ public class CartControllerTestSuite {
         //Given
         List<CartDto> cartDtoList = new ArrayList<>();
         UserDto userDto = new UserDto();
-        cartDtoList.add(new CartDto(1L, new BigDecimal(0), new ArrayList<>(), new ArrayList<>()));
+        cartDtoList.add(new CartDto(1L, new BigDecimal(0), new ArrayList<>(), new ArrayList<>(), userDto));
 
         List<Cart> cartList = new ArrayList<>();
         User user = new User();
@@ -87,7 +87,7 @@ public class CartControllerTestSuite {
 
         //Given
         UserDto userDto = new UserDto();
-        CartDto cartDto = new CartDto(1L, new BigDecimal(0), new ArrayList<>(), new ArrayList<>());
+        CartDto cartDto = new CartDto(1L, new BigDecimal(0), new ArrayList<>(), new ArrayList<>(), userDto);
 
         User user = new User();
         Cart cart = new Cart(1L, new BigDecimal(0), new ArrayList<>(), new ArrayList<>(), user);
@@ -121,7 +121,7 @@ public class CartControllerTestSuite {
     public void shouldUpdateCart() throws Exception {
         //Given
         UserDto userDto = new UserDto();
-        CartDto cartDto = new CartDto(1L, new BigDecimal(0), new ArrayList<>(), new ArrayList<>());
+        CartDto cartDto = new CartDto(1L, new BigDecimal(0), new ArrayList<>(), new ArrayList<>(), userDto);
 
         User user = new User();
         Cart cart = new Cart(1L, new BigDecimal(0), new ArrayList<>(), new ArrayList<>(), user);
@@ -148,7 +148,7 @@ public class CartControllerTestSuite {
 
         //Given
         UserDto userDto = new UserDto();
-        CartDto cartDto = new CartDto(1L, new BigDecimal(0), new ArrayList<>(), new ArrayList<>());
+        CartDto cartDto = new CartDto(1L, new BigDecimal(0), new ArrayList<>(), new ArrayList<>(), userDto);
 
         User user = new User();
         Cart cart = new Cart(1L, new BigDecimal(0), new ArrayList<>(), new ArrayList<>(), user);
