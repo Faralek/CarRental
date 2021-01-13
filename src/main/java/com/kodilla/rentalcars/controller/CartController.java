@@ -36,7 +36,7 @@ public class CartController {
         return cartMapper.mapToCartDto(cartDbService.saveCart(cartMapper.mapToCart(cartDto)));
     }
 
-    @RequestMapping(method = RequestMethod.POST, value = "/carts/addCar")
+    @RequestMapping(method = RequestMethod.POST, value = "/carts/addCar", consumes = APPLICATION_JSON_VALUE)
     public void addCar(@RequestParam int duration, @RequestBody CarDto carDto, @RequestParam Long id) {
         Cart cart = cartDbService.getCartById(id).get();
         cartDbService.getCartById(id).get().addCar(carMapper.mapToCar(carDto), duration);

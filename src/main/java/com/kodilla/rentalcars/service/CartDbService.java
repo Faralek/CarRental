@@ -23,7 +23,7 @@ public class CartDbService {
     }
 
     public Cart saveCart(final Cart cart){
-        logService.saveLog(new Log("Created new cart" , LocalDate.now()));
+    //    logService.saveLog(new Log("Created new cart" , LocalDate.now()));
         return cartRepository.save(cart);
     }
 
