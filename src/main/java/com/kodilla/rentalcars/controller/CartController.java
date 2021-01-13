@@ -1,5 +1,6 @@
 package com.kodilla.rentalcars.controller;
 
+import com.kodilla.rentalcars.domain.Car;
 import com.kodilla.rentalcars.domain.Cart;
 import com.kodilla.rentalcars.dto.CarDto;
 import com.kodilla.rentalcars.dto.CartDto;
@@ -12,6 +13,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
@@ -37,10 +39,12 @@ public class CartController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/carts/addCar", consumes = APPLICATION_JSON_VALUE)
-    public void addCar(@RequestParam int duration, @RequestBody CarDto carDto, @RequestParam Long id) {
+    public Cart addCar(@RequestParam int duration, @RequestBody CarDto carDto, @RequestParam Long id) {
         Cart cart = cartDbService.getCartById(id).get();
-        cartDbService.getCartById(id).get().addCar(carMapper.mapToCar(carDto), duration);
+        Car car = carMapper.mapToCar(carDto);
+        cart.addCar(car, duration);
         cartDbService.saveCart(cart);
+        return cart;
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/carts/removeCar")
@@ -57,6 +61,8 @@ public class CartController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/carts/{cartId}")
     public CartDto getCart(@PathVariable Long cartId) throws CartNotFoundException {
+        Optional<Cart> cart = cartDbService.getCartById(cartId);
+        System.out.println(cart.get().getCars().size());
         return cartMapper.mapToCartDto(cartDbService.getCartById(cartId).orElseThrow(() -> new CartNotFoundException("Cart not found " + cartId)));
     }
 

@@ -69,10 +69,11 @@ public class Cart {
         return user;
     }
 
-    public void addCar(Car car, int duration) {
+    public List<Car> addCar(Car car, int duration) {
         BigDecimal carPrice = car.getDailyPrice().multiply(BigDecimal.valueOf(duration));
         sum = sum.add(carPrice);
         cars.add(car);
+        return cars;
     }
 
     public void removeCar(Car car, int duration) {
