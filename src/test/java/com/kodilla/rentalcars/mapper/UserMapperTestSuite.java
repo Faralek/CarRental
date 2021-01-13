@@ -8,24 +8,15 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
-
 @RunWith(MockitoJUnitRunner.class)
 public class UserMapperTestSuite {
     @InjectMocks
     private UserMapper userMapper;
-    @Mock
-    private CartMapper cartMapper;
-    @Mock
-    private OrderMapper orderMapper;
 
     @Test
     public void testUserMapper() {
